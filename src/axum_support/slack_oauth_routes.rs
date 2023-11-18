@@ -52,7 +52,7 @@ impl<H: 'static + Send + Sync + Connect + Clone> SlackEventsAxumListener<H> {
         &self,
         config: &SlackOAuthListenerConfig,
         install_service_fn: UserCallbackFunction<
-            SlackOAuthV2AccessTokenResponse,
+            SlackOAuthV2AccessTokenResponseWithState,
             impl Future<Output = ()> + 'static + Send,
             SlackClientHyperConnector<H>,
         >,
@@ -99,7 +99,10 @@ impl<H: 'static + Send + Sync + Connect + Clone> SlackEventsAxumListener<H> {
                                     &oauth_resp.authed_user.id
                                 );
                                 install_service_fn(
-                                    oauth_resp,
+                                    SlackOAuthV2AccessTokenResponseWithState {
+                                        response: oauth_resp,
+                                        state: params.get("state").map(|s| s.to_string())
+                                    },
                                     environment.client.clone(),
                                     environment.user_state.clone(),
                                 )
@@ -174,7 +177,7 @@ impl<H: 'static + Send + Sync + Connect + Clone> SlackEventsAxumListener<H> {
         root_path: &str,
         config: &SlackOAuthListenerConfig,
         install_service_fn: UserCallbackFunction<
-            SlackOAuthV2AccessTokenResponse,
+            SlackOAuthV2AccessTokenResponseWithState,
             impl Future<Output = ()> + 'static + Send,
             SlackClientHyperConnector<H>,
         >,
@@ -213,3 +216,4 @@ impl<H: 'static + Send + Sync + Connect + Clone> SlackEventsAxumListener<H> {
         }
     }
 }
+

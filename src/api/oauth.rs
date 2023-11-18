@@ -69,6 +69,13 @@ pub struct SlackOAuthV2AccessTokenResponse {
 
 #[skip_serializing_none]
 #[derive(Debug, PartialEq, Clone, Serialize, Deserialize, Builder)]
+pub struct SlackOAuthV2AccessTokenResponseWithState{
+    pub response: SlackOAuthV2AccessTokenResponse,
+    pub state: Option<String>,
+}
+
+#[skip_serializing_none]
+#[derive(Debug, PartialEq, Clone, Serialize, Deserialize, Builder)]
 pub struct SlackOAuthV2AuthedUser {
     pub id: SlackUserId,
     pub scope: Option<SlackApiTokenScope>,

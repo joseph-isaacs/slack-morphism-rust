@@ -7,7 +7,7 @@ use axum::Extension;
 use std::sync::Arc;
 
 async fn test_oauth_install_function(
-    resp: SlackOAuthV2AccessTokenResponse,
+    resp: SlackOAuthV2AccessTokenResponseWithState,
     _client: Arc<SlackHyperClient>,
     _states: SlackClientEventsUserState,
 ) {
