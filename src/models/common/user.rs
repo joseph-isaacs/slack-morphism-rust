@@ -46,6 +46,16 @@ pub struct SlackUserProfile {
 
 #[skip_serializing_none]
 #[derive(Debug, PartialEq, Clone, Serialize, Deserialize, Builder)]
+pub struct SlackUserIdentity {
+    pub id: SlackUserId,
+    pub name: SlackUserId,
+    pub email: Option<SlackUserId>,
+    #[serde(flatten)]
+    pub icon: Option<SlackIcon>,
+}
+
+#[skip_serializing_none]
+#[derive(Debug, PartialEq, Clone, Serialize, Deserialize, Builder)]
 pub struct SlackUserFlags {
     pub is_admin: Option<bool>,
     pub is_app_user: Option<bool>,

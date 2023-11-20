@@ -315,7 +315,7 @@ pub struct SlackApiUsersGetPresenceResponse {
 #[skip_serializing_none]
 #[derive(Debug, PartialEq, Clone, Serialize, Deserialize, Builder)]
 pub struct SlackApiUsersIdentityResponse {
-    pub user: SlackUserProfile,
+    pub user: SlackUserIdentity,
     pub team: SlackBasicTeamInfo,
 }
 
