@@ -73,7 +73,7 @@ where
     ///
     /// https://api.slack.com/methods/users.identity
     ///
-    pub async fn users_identity(&self) -> ClientResult<SlackApiUsersInfoResponse> {
+    pub async fn users_identity(&self) -> ClientResult<SlackApiUsersIdentityResponse> {
         self.http_session_api
             .http_get(
                 "users.identity",
